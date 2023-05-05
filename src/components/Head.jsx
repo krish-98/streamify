@@ -4,8 +4,17 @@ import { BiSearch } from "react-icons/bi"
 import { MdOutlineNotificationsNone } from "react-icons/md"
 import { TbAdjustmentsHorizontal } from "react-icons/tb"
 import user from "../assets/user.png"
+import { useDispatch } from "react-redux"
+import { toggleMenu } from "../redux/features/navSlice"
+import { Link } from "react-router-dom"
 
 const Head = () => {
+  const dispatch = useDispatch()
+
+  const ToggleSidebar = () => {
+    dispatch(toggleMenu())
+  }
+
   return (
     <>
       {/* Mobile Header */}
@@ -28,13 +37,19 @@ const Head = () => {
       {/* From Tab - Desktop Header */}
       <nav className="hidden md:flex items-center justify-between p-4 px-6 xl:px-8">
         <div className="flex items-center gap-4">
-          <GiHamburgerMenu className="h-6 w-6" />
-          <div className="flex items-center gap-1">
-            <BsYoutube className="h-6 w-6 fill-red-600" />
-            <h1 className="font-bold tracking-wide text-lg xl:text-xl">
-              Streamify
-            </h1>
-          </div>
+          <GiHamburgerMenu
+            onClick={() => ToggleSidebar()}
+            className="h-6 w-6  cursor-pointer"
+          />
+
+          <Link to="/">
+            <div className="flex items-center gap-1">
+              <BsYoutube className="h-6 w-6 fill-red-600 cursor-pointer" />
+              <h1 className="font-bold tracking-wide text-lg xl:text-xl">
+                Streamify
+              </h1>
+            </div>
+          </Link>
         </div>
 
         <div className="flex justify-between items-center border w-1/2 rounded-full xl:max-w-[600px] xl:mr-24">
